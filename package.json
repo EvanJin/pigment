@@ -1,0 +1,30 @@
+{
+  "name": "pigment",
+  "version": "0.0.1",
+  "description": "Color information and manipulation library",
+  "main": "color.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "node_modules/.bin/mocha test/color.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:satya164/pigment.git"
+  },
+  "keywords": [
+    "color",
+    "colour",
+    "css"
+  ],
+  "author": "Satyajit Sahoo <satyajit.happy@gmail.com>",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/satya164/pigment/issues"
+  },
+  "homepage": "https://github.com/satya164/pigment",
+  "devDependencies": {
+    "mocha": "latest"
+  }
+}
