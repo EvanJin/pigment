@@ -12,10 +12,10 @@
         match: function(c) {
             return (typeof c === "object" && typeof c.red === "number" && typeof c.green === "number" && typeof c.blue === "number");
         },
-        tocolor: function(c) {
+        frommodel: function(c) {
             return c;
         },
-        fromcolor: function() {
+        tomodel: function() {
             return {
                 red: this.red,
                 green: this.green,
@@ -64,7 +64,7 @@
         if (type) {
             props = [ "red", "green", "blue" ];
 
-            c = _models[type].tocolor(color);
+            c = _models[type].frommodel(color);
 
             for (var i = 0, l = props.length; i < l; i++) {
                 Object.defineProperty(this, props[i], {
@@ -125,24 +125,24 @@
             throw new Error("Invalid match method " + model.match);
         }
 
-        if (typeof model.tocolor !== "function") {
-            throw new Error("Invalid tocolor method " + model.tocolor);
+        if (typeof model.frommodel !== "function") {
+            throw new Error("Invalid frommodel method " + model.frommodel);
         }
 
-        if (typeof model.fromcolor !== "function") {
-            throw new Error("Invalid fromcolor method " + model.fromcolor);
+        if (typeof model.tomodel !== "function") {
+            throw new Error("Invalid tomodel method " + model.tomodel);
         }
 
         for (var prop in model) {
-            if (prop !== "tocolor" && /^to/.test(prop)) {
+            if (prop !== "tomodel" && /^to/.test(prop)) {
                 throw new Error("Cannot use property prefixed by 'to' " + prop);
             }
 
-            if (prop !== "fromcolor" && /^from/.test(prop)) {
+            if (prop !== "frommodel" && /^from/.test(prop)) {
                 throw new Error("Cannot use property prefixed by 'from' " + prop);
             }
 
-            if (!/^(match|tocolor|fromcolor)$/.test(prop)) {
+            if (!/^(match|tomodel|frommodel)$/.test(prop)) {
                 // Add extra methods
                 ColorConstructor.prototype[prop] = model[prop];
             }
@@ -154,7 +154,7 @@
 
             args = args.length ? args : [ this._color ];
 
-            return model.tocolor.apply(this, args);
+            return model.frommodel.apply(this, args);
         };
 
         ColorConstructor.prototype["to" + name] = function() {
@@ -163,7 +163,7 @@
             if (this._type === name && !args.length) {
                 return this._color;
             } else {
-                return model.fromcolor.apply(this);
+                return model.tomodel.apply(this);
             }
         };
 

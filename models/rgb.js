@@ -3,7 +3,7 @@
 module.exports = {
     match: /^rgba?\s?\((\s?(\d+)\s?,){2}\s?(\d+)\s?/i,
 
-    tocolor: function(c) {
+    frommodel: function(c) {
         var rgb = c.replace(/[rgba()]/g, "").split(",");
 
         return {
@@ -14,7 +14,7 @@ module.exports = {
         };
     },
 
-    fromcolor: function() {
+    tomodel: function() {
         return "rgba(" + this.red + ", " + this.green + ", " + this.blue + ", " + this.alpha + ")";
     },
 
