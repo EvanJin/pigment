@@ -186,7 +186,7 @@
         map = {};
         colors = [];
 
-        words = str.match(/(\w+\((\s?(\d?.?\d+)%?\s?,?)+\)|\S+)/gi, "") || [];
+        words = str.match(/(\w+\((\s?(\d?.?\d+)%?\s?,?)+\)|[^,;:!'"\.\?\s]+|\S+)/gi, "") || [];
 
         for (var i = 0, l = words.length; i < l; i++) {
             if (_fn.getType(words[i])) {
