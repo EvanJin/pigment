@@ -20,6 +20,12 @@ describe("ColorConstructor", function() {
         assert.ok(d.red === 234 && d.green === 224 && d.blue === 64 && d.alpha === 0.5);
     });
 
+    it("should give back original color", function() {
+        var c = new Color("#f06860");
+
+        assert.ok(c.tohex() === "#f06860" && c.torgb() === "rgba(240, 104, 96, 1)");
+    });
+
     it("should parse colors from string", function() {
         var colors = Color.parse("Some roses aren't #ff0000, some violets aren't rgb(0, 0, 255), nobody's wrong, except maybe you!");
 
