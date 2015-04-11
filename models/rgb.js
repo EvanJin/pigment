@@ -1,5 +1,5 @@
 module.exports = {
-    match: /^rgba?[\s+]?\([\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?/i,
+    match: /^rgba?\s?\((\s?(\d+)\s?,){2}\s?(\d+)\s?/i,
     tocolor: function(c) {
         var rgb = c.replace(/[rgba()]/g, "").split(",");
 
