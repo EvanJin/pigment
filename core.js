@@ -150,11 +150,17 @@
 
         // Add helper methods to convert from and to the model
         ColorConstructor.prototype["from" + name] = function() {
-            return model.tocolor.apply(this, this._color);
+            var args = Array.prototype.slice.call(arguments);
+
+            args = args.length ? args : [ this._color ];
+
+            return model.tocolor.apply(this, args);
         };
 
         ColorConstructor.prototype["to" + name] = function() {
-            if (this._type === name) {
+            var args = Array.prototype.slice.call(arguments);
+
+            if (this._type === name && !args.length) {
                 return this._color;
             } else {
                 return model.fromcolor.apply(this);
