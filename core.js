@@ -142,7 +142,7 @@
                 throw new Error("Cannot use property prefixed by 'from' " + prop);
             }
 
-            if (!/^(tocolor|fromcolor)$/.test(prop)) {
+            if (!/^(match|tocolor|fromcolor)$/.test(prop)) {
                 // Add extra methods
                 ColorConstructor.prototype[prop] = model[prop];
             }
