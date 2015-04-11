@@ -4,7 +4,7 @@
     "eqeqeq": true,
     "noarg": true,
     "node": true,
-    "predef": [ "define" ],
+    "predef": [ "define", "Color" ],
     "unused": true,
     "undef": true
 }

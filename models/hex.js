@@ -1,5 +1,6 @@
 module.exports = {
     match: /^#([0-9a-f]{3}){1,2}$/i,
+
     tocolor: function(c) {
         var hex;
 
@@ -17,6 +18,7 @@ module.exports = {
             blue: parseInt(hex[3], 16)
         };
     },
+
     fromcolor: function() {
         var r = ("0" + parseInt(this.red, 10).toString(16)).slice(-2),
             g = ("0" + parseInt(this.green, 10).toString(16)).slice(-2),
