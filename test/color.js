@@ -20,6 +20,12 @@ describe("ColorConstructor", function() {
         assert.ok(d.red === 234 && d.green === 224 && d.blue === 64 && d.alpha === 0.5);
     });
 
+    it("should parse colors from string", function() {
+        var colors = Color.parse("Some roses aren't #ff0000, some violets aren't rgb(0, 0, 255), nobody's wrong, except maybe you!");
+
+        assert.ok(colors.length === 2 && colors[0].tohex() === "#ff0000" && colors[1].tohex() === "#0000ff");
+    });
+
     it("should generate a random color", function() {
         var c = Color.random();
 
