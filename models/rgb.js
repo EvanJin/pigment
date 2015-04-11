@@ -1,3 +1,5 @@
+/* global Color */
+
 module.exports = {
     match: /^rgba?\s?\((\s?(\d+)\s?,){2}\s?(\d+)\s?/i,
 
