@@ -28,6 +28,10 @@
     _fn.getType = function(color) {
         var type;
 
+        if (!color) {
+            return;
+        }
+
         for (var model in _models) {
             if (typeof _models[model].match === "function") {
                 if (_models[model].match(color)) {
@@ -182,12 +186,12 @@
         map = {};
         colors = [];
 
-        words = str.match(/\S+/g);
+        words = str.match(/(\w+\((\s?(\d?.?\d+)%?\s?,?)+\)|\S+)/gi, "") || [];
 
         for (var i = 0, l = words.length; i < l; i++) {
             if (_fn.getType(words[i])) {
                 try {
-                    c = new Color(words[i]);
+                    c = new ColorConstructor(words[i]);
                 } catch (e) {
                     continue;
                 }
