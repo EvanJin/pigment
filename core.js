@@ -144,7 +144,11 @@
             }
         }
 
-        // Add helper method to convert to the model
+        // Add helper methods to convert from and to the model
+        ColorConstructor.prototype["from" + name] = function() {
+            return model.tocolor.apply(this, this._color);
+        };
+
         ColorConstructor.prototype["to" + name] = function() {
             if (this._type === name) {
                 return this._color;
