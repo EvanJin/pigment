@@ -35,10 +35,8 @@ describe("core", function() {
     });
 
     it("should create a valid color object", function() {
-        var c, d;
-
-        c = new Color({ red: 240, green: 104, blue: 96 });
-        d = new Color({ red: 233, green: 240, blue: 96, alpha: 0.5 });
+        var c = new Color({ red: 240, green: 104, blue: 96 }),
+            d = new Color({ red: 233, green: 240, blue: 96, alpha: 0.5 });
 
         assert.ok(c.red === 240 && c.green === 104 && c.blue === 96 && c.alpha === 1);
         assert.ok(d.red === 233 && d.green === 240 && d.blue === 96 && d.alpha === 0.5);
