@@ -30,7 +30,11 @@ module.exports = {
             h /= 6;
         }
 
-        this.hsv = [ h, s, v ];
+        this.hsv =  [
+            Math.round(h * 360),
+            Math.round(s * 100),
+            Math.round(v * 100)
+        ];
     },
 
     frommodel: function(c) {
@@ -95,11 +99,6 @@ module.exports = {
     },
 
     tomodel: function() {
-        return "hsva(" +
-                     Math.round(this.hsv[0] * 360) + ", " +
-                     Math.round(this.hsv[1] * 100) + "%, " +
-                     Math.round(this.hsv[2] * 100) + "%, " +
-                     this.alpha +
-                     ")";
+        return "hsva(" + this.hsv[0] + ", " + this.hsv[1] + "%, " + this.hsv[2] + "%, " + this.alpha + ")";
     }
 };

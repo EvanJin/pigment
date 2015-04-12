@@ -30,7 +30,11 @@ module.exports = {
             h /= 6;
         }
 
-        this.hsl = [ h, s, l ];
+        this.hsl = [
+            Math.round(h * 360),
+            Math.round(s * 100),
+            Math.round(l * 100)
+        ];
     },
 
     frommodel: function(c) {
@@ -88,11 +92,6 @@ module.exports = {
     },
 
     tomodel: function() {
-        return "hsla(" +
-                     Math.round(this.hsl[0] * 360) + ", " +
-                     Math.round(this.hsl[1] * 100) + "%, " +
-                     Math.round(this.hsl[2] * 100) + "%, " +
-                     this.alpha +
-                     ")";
+        return "hsla(" + this.hsl[0] + ", " + this.hsl[1] + "%, " + this.hsl[2] + "%, " + this.alpha + ")";
     }
 };
