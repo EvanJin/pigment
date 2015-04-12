@@ -1,6 +1,8 @@
 # Pigment
 A color information, conversion and manipulation library with support for various color models!
 
+![Build status](https://travis-ci.org/satya164/pigment.svg?branch=master)
+
 ## Installation
 ```sh
 $ npm install pigment
