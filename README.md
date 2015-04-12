@@ -2,7 +2,7 @@
 A color information, conversion and manipulation library with support for various color models!
 
 ## Installation
-```bash
+```sh
 $ npm install pigment
 ```
 
@@ -33,7 +33,7 @@ c.fadeout(.2).mix("#e9f060", .5).fadein(.1).tohex(); // #ebb960
 
 Apart from color conversion and manipulation, **pigment** is also able to parse a chunk of text to find out any colors.
 
-```
+```javascript
 var colors = Color.parse("Some roses aren't #ff0000, some violets aren't rgb(0, 0, 255), nobody's wrong, except maybe you!")
 
 for (var i = 0, l = colors.length; i < l; i++) {
@@ -43,14 +43,14 @@ for (var i = 0, l = colors.length; i < l; i++) {
 
 Generating a random color is also easy,
 
-```
+```javascript
 Color.random().tohex(); // #a68a4b
 ```
 
 ## Core API
 All the functionality in **pigment** is achieved with models. The `addModel` method can be used to add a new color model to **pigment**.
 
-```
+```javascript
 Color.addModel(name, model);
 ```
 
