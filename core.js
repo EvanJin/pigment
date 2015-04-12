@@ -52,19 +52,20 @@
     };
 
     function ColorConstructor(color) {
-        var c, type, props;
+        var c, type, props, args;
 
         // Handle situation where called without "new" keyword
         if (false === (this instanceof ColorConstructor)) {
             return new ColorConstructor(color);
         }
 
+        args = Array.prototype.slice.call(arguments);
         type = _fn.getType(color);
 
         if (type) {
             props = [ "red", "green", "blue" ];
 
-            c = _models[type].frommodel(color);
+            c = _models[type].frommodel.apply(this, args);
 
             for (var i = 0, l = props.length; i < l; i++) {
                 Object.defineProperty(this, props[i], {
@@ -91,6 +92,12 @@
                 writable: false,
                 enumerable: false
             });
+
+            for (var model in _models) {
+                if (typeof _models[model].init === "function") {
+                    _models[model].init.apply(this, args);
+                }
+            }
         } else {
             throw new Error("Invalid color " + color);
         }
@@ -142,7 +149,7 @@
                 throw new Error("Cannot use property prefixed by 'from' " + prop);
             }
 
-            if (!/^(match|tomodel|frommodel)$/.test(prop)) {
+            if (!/^(init|match|tomodel|frommodel)$/.test(prop)) {
                 // Add extra methods
                 ColorConstructor.prototype[prop] = model[prop];
             }
