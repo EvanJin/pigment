@@ -99,7 +99,7 @@ module.exports = {
         weight2 = 1 - weight1;
 
         for (var i = 0, l = this.rgb.length; i < l; i++) {
-            rgb.push(this.rgb[i] * weight1 + c.rgb[i] * weight2);
+            rgb.push(Math.round(this.rgb[i] * weight1 + c.rgb[i] * weight2));
         }
 
         return new Color({
