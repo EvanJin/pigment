@@ -15,7 +15,7 @@ To use **pigment** in your projects, you need to require the node module first.
 var Color = require("pigment");
 ```
 
-To be able to perform any operations on a color, you need to create a new color object.
+To be able to perform any operations on a color, create a new color object.
 
 ```javascript
 var c = new Color("#f06860");
@@ -63,6 +63,8 @@ The model object must consist 3 properties,
 3. `tomodel` - A function which converts the color to the model representation.
 
 There is also an optional `init` method which is called when instantiating a color object.
+
+Any dependencies on other color models can be specified with a `depends` property with the model names in an array.
 
 Have a look at the `models` directory in the repository for examples.
 
