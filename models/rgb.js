@@ -3,6 +3,10 @@
 module.exports = {
     match: /^rgba?\s?\((\s?(\d+)\s?,){2}\s?(\d+)\s?/i,
 
+    init: function() {
+        this.rgb = [ this.red, this.green, this.blue ];
+    },
+
     frommodel: function(c) {
         var rgb = c.replace(/[rgba()]/g, "").split(",");
 
@@ -15,14 +19,14 @@ module.exports = {
     },
 
     tomodel: function() {
-        return "rgba(" + this.red + ", " + this.green + ", " + this.blue + ", " + this.alpha + ")";
+        return "rgba(" + this.rgb[0] + ", " + this.rgb[1] + ", " + this.rgb[2] + ", " + this.alpha + ")";
     },
 
     filter: function(matrix) {
         var c = {
-                r: this.red,
-                g: this.green,
-                b: this.blue,
+                r: this.rgb[0],
+                g: this.rgb[1],
+                b: this.rgb[2],
                 a: this.alpha
             },
             m = matrix,
@@ -45,12 +49,11 @@ module.exports = {
     },
 
     luminance: function() {
-        var props = [ "red", "green", "blue" ],
-            lum = [],
+        var lum = [],
             chan;
 
-        for (var i = 0, l = props.length; i < l; i++) {
-            chan = this[props[i]] / 255;
+        for (var i = 0, l = this.rgb.length; i < l; i++) {
+            chan = this.rgb[i] / 255;
 
             lum[i] = (chan <= 0.03928) ? (chan / 12.92) : Math.pow(((chan + 0.055) / 1.055), 2.4);
         }
@@ -59,25 +62,25 @@ module.exports = {
     },
 
     darkness: function() {
-        var yiq = (this.red * 299 + this.green * 587 + this.blue * 114) / 1000;
+        var yiq = (this.rgb[0] * 299 + this.rgb[1] * 587 + this.rgb[2] * 114) / 1000;
 
         return 1 - (yiq / 255);
     },
 
     negate: function() {
         return new Color({
-            red: 255 - this.red,
-            green: 255 - this.green,
-            blue: 255 - this.blue,
+            red: 255 - this.rgb[0],
+            green: 255 - this.rgb[1],
+            blue: 255 - this.rgb[2],
             alpha: this.alpha
         });
     },
 
     greyscale: function() {
         return new Color({
-            red: this.red * 0.3,
-            green: this.green * 0.59,
-            blue: this.blue * 0.11,
+            red: this.rgb[0] * 0.3,
+            green: this.rgb[1] * 0.59,
+            blue: this.rgb[2] * 0.11,
             alpha: this.alpha
         });
     },
@@ -85,8 +88,7 @@ module.exports = {
     mix: function(add, weight) {
         var c = new Color(add),
             t1, d, weight1, weight2,
-            props = [ "red", "green", "blue" ],
-            obj = {};
+            rgb = [];
 
         weight = 1 - (weight ? weight : 0.5);
 
@@ -96,13 +98,16 @@ module.exports = {
         weight1 = (((t1 * d === -1) ? t1 : (t1 + d) / (1 + t1 * d)) + 1) / 2;
         weight2 = 1 - weight1;
 
-        for (var i = 0, l = props.length; i < l; i++) {
-            obj[props[i]] = this[props[i]] * weight1 + c[props[i]] * weight2;
+        for (var i = 0, l = this.rgb.length; i < l; i++) {
+            rgb.push(this.rgb[i] * weight1 + c.rgb[i] * weight2);
         }
 
-        obj.alpha = this.alpha * weight + c.alpha * (1 - weight);
-
-        return new Color(obj);
+        return new Color({
+            red: rgb[0],
+            green: rgb[1],
+            blue: rgb[2],
+            alpha: this.alpha * weight + c.alpha * (1 - weight)
+        });
     },
 
     fadein: function(ratio) {
@@ -111,9 +116,9 @@ module.exports = {
         alpha += alpha * Math.max(Math.min(ratio, 1), 0);
 
         return new Color({
-            red: this.red,
-            green: this.green,
-            blue: this.blue,
+            red: this.rgb[0],
+            green: this.rgb[1],
+            blue: this.rgb[2],
             alpha: alpha
         });
     },
@@ -124,9 +129,9 @@ module.exports = {
         alpha -= alpha * Math.max(Math.min(ratio, 1), 0);
 
         return new Color({
-            red: this.red,
-            green: this.green,
-            blue: this.blue,
+            red: this.rgb[0],
+            green: this.rgb[1],
+            blue: this.rgb[2],
             alpha: alpha
         });
     }
