@@ -43,9 +43,18 @@ describe("core", function() {
     });
 
     it("should parse colors from string", function() {
-        var colors = Color.parse("Some roses aren't #ff0000, some violets aren't rgb(0, 0, 255), nobody's wrong, except maybe you!");
+        var colors = Color.parse("Orange is a carrot, yellow is a pear, #008000 is the grass, and #a52a2a is a bear, rgba(128, 0, 128, 1) is a plum, rgba(0, 0, 255, 1) is the sky, hsla(0, 0%, 0%, 1) is a witch's hat, and hsla(0, 100%, 50%, 1) is cherry pie.");
 
-        assert.ok(colors.length === 2 && colors[0].tohex() === "#ff0000" && colors[1].tohex() === "#0000ff");
+        assert.equal(colors.length, 9);
+        assert.equal(colors[0].tohex(), "#ffa500");
+        assert.equal(colors[1].tohex(), "#ffff00");
+        assert.equal(colors[2].tohex(), "#008000");
+        assert.equal(colors[3].tohex(), "#a52a2a");
+        assert.equal(colors[4].tohex(), "#800080");
+        assert.equal(colors[5].tohex(), "#dda0dd");
+        assert.equal(colors[6].tohex(), "#0000ff");
+        assert.equal(colors[7].tohex(), "#000000");
+        assert.equal(colors[8].tohex(), "#ff0000");
     });
 
     it("should generate a random color", function() {
