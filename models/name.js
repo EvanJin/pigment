@@ -148,20 +148,33 @@ module.exports = (function() {
 
     return {
         match: function(c) {
-            return !!(c in _names);
+            return !!(c in _names || c === "transparent");
         },
 
         frommodel: function(c) {
-            var rgb = _names[c];
+            var rgb, alpha;
+
+            if (c === "transparent") {
+                rgb = [ 0, 0, 0 ];
+                alpha = 0;
+            } else {
+                rgb = _names[c];
+                alpha = 1;
+            }
 
             return {
                 red: rgb[0],
                 green: rgb[1],
-                blue: rgb[2]
+                blue: rgb[2],
+                alpha: alpha
             };
         },
 
         tomodel: function() {
+            if (this.red === 0 && this.blue === 0 && this.green === 0 && this.alpha === 0) {
+                return "transparent";
+            }
+
             for (var name in _names) {
                 if (_names[name].join(",") === (this.red + "," + this.green + "," + this.blue)) {
                     return name;

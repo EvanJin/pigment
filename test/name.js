@@ -15,4 +15,12 @@ describe("models:name", function() {
 
         assert.equal(c.toname(), "chocolate");
     });
+
+    it("should work with transparent color", function() {
+        var c = new Color({ red: 0, green: 0, blue: 0, alpha: 0 }),
+            d = new Color("transparent");
+
+        assert.equal(c.toname(), "transparent");
+        assert.ok(d.red === 0 && d.green === 0 && d.blue === 0 && d.alpha === 0);
+    });
 });
