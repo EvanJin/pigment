@@ -1,5 +1,5 @@
 /**
- * @fileOverview - Color information and manipulation library - Core.
+ * @fileOverview - Color information, conversion and manipulation library - Core.
  * @author - Satyajit Sahoo <satyajit.happy@gmail.com>
  * @license - GPL-3.0+
  */
