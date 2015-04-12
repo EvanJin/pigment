@@ -10,6 +10,19 @@ describe("ColorConstructor", function() {
         });
     });
 
+    it("should call init method", function() {
+        Color.addModel("none", {
+            match: function() {},
+            init: function() { this.inited = true; },
+            frommodel: function() {},
+            tomodel: function() {}
+        });
+
+        var c = new Color("#f06860");
+
+        assert.ok(c.inited);
+    });
+
     it("should create a valid color object", function() {
         var c, d;
 
