@@ -116,7 +116,7 @@
             if (Array.isArray(model.depends)) {
                 for (var i = 0, l = model.depends.length; i < l; i++) {
                     if (typeof model.depends[i] === "string") {
-                        if (_models[model.depends[i]] === -1) {
+                        if (!_models[model.depends[i]]) {
                             throw new Error("Unsatisfied dependency " + model.depends[i]);
                         }
                     } else {
