@@ -13,4 +13,10 @@ describe("models:hsl", function() {
         assert.ok(c.red === 240 && c.green === 104 && c.blue === 96 && c.alpha === 1);
         assert.ok(d.red === 233 && d.green === 240 && d.blue === 96 && d.alpha === 0.3);
     });
+
+    it("should return a valid hsla string", function() {
+        var c = new Color({ red: 240, green: 104, blue: 96, alpha: 0.3 });
+
+        assert.equal(c.tohsl(), "hsla(3, 83%, 66%, 0.3)");
+    });
 });
