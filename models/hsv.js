@@ -45,9 +45,9 @@ module.exports = {
 
         hsv = c.replace(/[hsva()]/g, "").split(",");
 
-        h = hsv[0] / 360;
-        s = hsv[1] / 100;
-        v = hsv[2] / 100;
+        h = parseInt(hsv[0], 10) / 360;
+        s = parseInt(hsv[1], 10) / 100;
+        v = parseInt(hsv[2], 10) / 100;
 
         alpha = hsv[3] ? parseFloat(hsv[3]) : 1;
 

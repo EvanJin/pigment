@@ -66,9 +66,9 @@ module.exports = {
 
         hsl = c.replace(/[hsla()]/g, "").split(",");
 
-        h = hsl[0] / 360;
-        s = hsl[1] / 100;
-        l = hsl[2] / 100;
+        h = parseInt(hsl[0], 10) / 360;
+        s = parseInt(hsl[1], 10) / 100;
+        l = parseInt(hsl[2], 10) / 100;
 
         alpha = hsl[3] ? parseFloat(hsl[3]) : 1;
 
