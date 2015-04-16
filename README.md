@@ -3,6 +3,7 @@ A color information, conversion and manipulation library with support for variou
 
 [![Build status](https://travis-ci.org/satya164/pigment.svg?branch=master)](https://travis-ci.org/satya164/pigment)
 [![Dependencies](https://david-dm.org/satya164/pigment.svg)](https://david-dm.org/satya164/pigment)
+[![License](https://img.shields.io/npm/l/pigment.svg)](http://opensource.org/licenses/mit-license.php)
 
 ## Installation
 ```sh
