@@ -14,9 +14,9 @@ module.exports = {
         }
 
         this.lab = [
-            Math.round(116 * xyz[1] - 16),
-            Math.round(500 * (xyz[0] - xyz[1])),
-            Math.round(200 * (xyz[1] - xyz[2]))
+            116 * xyz[1] - 16,
+            500 * (xyz[0] - xyz[1]),
+            200 * (xyz[1] - xyz[2])
         ];
     },
 
