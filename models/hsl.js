@@ -95,5 +95,61 @@ module.exports = {
 
     tomodel: function() {
         return "hsla(" + this.hsl[0] + ", " + this.hsl[1] + "%, " + this.hsl[2] + "%, " + this.alpha + ")";
+    },
+
+    rotate: function(degrees) {
+        var hsl = this.hsl.slice(0);
+
+        hsl[0] = (hsl[0] + degrees) % 360;
+        hsl[0] = hsl[0] < 0 ? 360 + hsl[0] : hsl[0];
+
+        return new Color(this.tohsl.call({
+            hsl: hsl,
+            alpha: this.alpha
+        }));
+    },
+
+    saturate: function(ratio) {
+        var hsl = this.hsl.slice(0);
+
+        hsl[1] += hsl[1] * Math.max(Math.min(ratio, 1), 0);
+
+        return new Color(this.tohsl.call({
+            hsl: hsl,
+            alpha: this.alpha
+        }));
+    },
+
+    desaturate: function(ratio) {
+        var hsl = this.hsl.slice(0);
+
+        hsl[1] -= hsl[1] * Math.max(Math.min(ratio, 1), 0);
+
+        return new Color(this.tohsl.call({
+            hsl: hsl,
+            alpha: this.alpha
+        }));
+    },
+
+    lighten: function(ratio) {
+        var hsl = this.hsl.slice(0);
+
+        hsl[2] += hsl[2] * Math.max(Math.min(ratio, 1), 0);
+
+        return new Color(this.tohsl.call({
+            hsl: hsl,
+            alpha: this.alpha
+        }));
+    },
+
+    darken: function(ratio) {
+        var hsl = this.hsl.slice(0);
+
+        hsl[2] -= hsl[2] * Math.max(Math.min(ratio, 1), 0);
+
+        return new Color(this.tohsl.call({
+            hsl: hsl,
+            alpha: this.alpha
+        }));
     }
 };
