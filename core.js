@@ -170,7 +170,7 @@
             if (this._type === name && !args.length) {
                 return this._color;
             } else {
-                return model.tomodel.apply(this);
+                return model.tomodel.apply(this, args);
             }
         };
 
@@ -199,7 +199,7 @@
         map = {};
         colors = [];
 
-        words = str.toLowerCase().match(/(\w+\((\s?(\d?.?\d+)%?\s?,?)+\)|[^,;:!'"\.\?\s]+|\S+)/gi, "") || [];
+        words = str.toLowerCase().match(/(\w+\((\s?(\d+\.?\d?)%?\s?,?)+\)|[^,;:!'"\.\?\s]+|\S+)/gi, "") || [];
 
         for (var i = 0, l = words.length; i < l; i++) {
             if (_fn.getType(words[i])) {

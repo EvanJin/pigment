@@ -1,5 +1,5 @@
 module.exports = {
-    match: /^xyza?\s?\((\s?(\d+)\s?,){2}\s?(\d+)\s?/i,
+    match: /^xyza?\s?\((\s?(\d+\.?\d?)\s?,){2}\s?(\d+\.?\d?)\s?/i,
 
     init: function() {
         var rgb = [

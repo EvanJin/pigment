@@ -1,7 +1,7 @@
 var white = [ 95.047, 100.000, 108.883 ];
 
 module.exports = {
-    match: /^l\*?a\*?b\*?\s?\(\s?(\d+)\s?,\s?-?\s?(\d+)?\s?,\s?-?\s?(\d+)?\s?/i,
+    match: /^l\*?a\*?b\*?\s?\(\s?(\d+\.?\d?)\s?,\s?-?(\d+\.?\d?)?\s?,\s?-?(\d+\.?\d?)?\s?/i,
 
     depends: [ "xyz" ],
 
@@ -37,7 +37,7 @@ module.exports = {
             xyz[i] = Math.round(xyz[i] * white[i]);
         }
 
-        return this.fromxyz("xyz(" + xyz[0] + "," + xyz[1] + "," + xyz[2] + ")");
+        return this.fromxyz(this.toxyz.call({ xyz: xyz }));
     },
 
     tomodel: function() {
