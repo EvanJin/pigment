@@ -109,7 +109,7 @@
         }
 
         if (typeof model !== "object") {
-            throw new Error("Invalid model object " + model);
+            throw new Error("Invalid model object " + model + " for " + name);
         }
 
         if (model.depends) {
@@ -117,36 +117,36 @@
                 for (var i = 0, l = model.depends.length; i < l; i++) {
                     if (typeof model.depends[i] === "string") {
                         if (!_models[model.depends[i]]) {
-                            throw new Error("Unsatisfied dependency " + model.depends[i]);
+                            throw new Error("Unsatisfied dependency " + model.depends[i] + " for " + name);
                         }
                     } else {
-                        throw new Error("Invalid dependency " + model.depends[i]);
+                        throw new Error("Invalid dependency " + model.depends[i] + " for " + name);
                     }
                 }
             } else {
-                throw new Error("Invalid depends array " + model.depends);
+                throw new Error("Invalid depends array " + model.depends + " in " + name);
             }
         }
 
         if (typeof model.match !== "function" && !(model.match instanceof RegExp)) {
-            throw new Error("Invalid match method " + model.match);
+            throw new Error("Invalid match method " + model.match + " in " + name);
         }
 
         if (typeof model.frommodel !== "function") {
-            throw new Error("Invalid frommodel method " + model.frommodel);
+            throw new Error("Invalid frommodel method " + model.frommodel + " in " + name);
         }
 
         if (typeof model.tomodel !== "function") {
-            throw new Error("Invalid tomodel method " + model.tomodel);
+            throw new Error("Invalid tomodel method " + model.tomodel + " in " + name);
         }
 
         for (var prop in model) {
             if (prop !== "tomodel" && /^to/.test(prop)) {
-                throw new Error("Cannot use property prefixed by 'to' " + prop);
+                throw new Error("Cannot use property prefixed by 'to' " + prop + " in " + name);
             }
 
             if (prop !== "frommodel" && /^from/.test(prop)) {
-                throw new Error("Cannot use property prefixed by 'from' " + prop);
+                throw new Error("Cannot use property prefixed by 'from' " + prop + " in " + name);
             }
 
             if (!/^(init|match|depends|tomodel|frommodel)$/.test(prop)) {
