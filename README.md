@@ -2,7 +2,6 @@
 A color information, conversion and manipulation library with support for various color models!
 
 [![Build status](https://travis-ci.org/satya164/pigment.svg?branch=master)](https://travis-ci.org/satya164/pigment)
-[![Coverage Status](https://coveralls.io/repos/satya164/pigment/badge.svg)](https://coveralls.io/r/satya164/pigment)
 [![Dependencies](https://david-dm.org/satya164/pigment.svg)](https://david-dm.org/satya164/pigment)
 
 ## Installation
