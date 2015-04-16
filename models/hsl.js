@@ -1,5 +1,5 @@
 module.exports = {
-    match: /^hsla?\s?\(\s?(\d+)\s?,\s?(\d+)[%]?\s?,\s?(\d+)[%]?\s?/i,
+    match: /^hsla?\s?\(\s?(\d+)\s?,\s?(\d+)%?\s?,\s?(\d+)%?\s?/i,
 
     init: function() {
         var r = this.red / 255,
