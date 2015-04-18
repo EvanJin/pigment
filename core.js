@@ -65,52 +65,52 @@
 
         type = _fn.getType(color);
 
-        if (type) {
-            props = [ "red", "green", "blue" ];
+        if (!type) {
+            throw new Error("Invalid color " + color);
+        }
 
-            if (typeof _models[type].format === "function") {
-                this[type] = _models[type].format.apply(this, args);
-            }
+        props = [ "red", "green", "blue" ];
 
-            c = _models[type].frommodel.apply(this, args);
+        if (typeof _models[type].format === "function") {
+            this[type] = _models[type].format.apply(this, args);
+        }
 
-            for (var i = 0, l = props.length; i < l; i++) {
-                Object.defineProperty(this, props[i], {
-                    value: (c[props[i]] >= 0 && c[props[i]] <= 255) ? c[props[i]] : 0,
-                    writable: false,
-                    enumerable: true
-                });
-            }
+        c = _models[type].frommodel.apply(this, args);
 
-            Object.defineProperty(this, "alpha", {
-                value: (typeof c.alpha === "number" && !isNaN(c.alpha) && c.alpha <= 1) ? c.alpha : 1,
+        for (var i = 0, l = props.length; i < l; i++) {
+            Object.defineProperty(this, props[i], {
+                value: (typeof c[props[i]] === "number" && !isNaN(c[props[i]]) && c[props[i]] >= 0 && c[props[i]] <= 255) ? c[props[i]] : 0,
                 writable: false,
                 enumerable: true
             });
+        }
 
-            Object.defineProperty(this, "_color", {
-                value: color,
-                writable: false,
-                enumerable: false
-            });
+        Object.defineProperty(this, "alpha", {
+            value: (typeof c.alpha === "number" && !isNaN(c.alpha) && c.alpha >= 0 && c.alpha <= 1) ? c.alpha : 1,
+            writable: false,
+            enumerable: true
+        });
 
-            Object.defineProperty(this, "_type", {
-                value: type,
-                writable: false,
-                enumerable: false
-            });
+        Object.defineProperty(this, "_color", {
+            value: color,
+            writable: false,
+            enumerable: false
+        });
 
-            for (var model in _models) {
-                if (model !== type && typeof _models[model].convert === "function") {
-                    this[model] = _models[model].convert.apply(this, args);
-                }
+        Object.defineProperty(this, "_type", {
+            value: type,
+            writable: false,
+            enumerable: false
+        });
 
-                if (typeof _models[model].init === "function") {
-                    _models[model].init.apply(this, args);
-                }
+        for (var model in _models) {
+            if (model !== type && typeof _models[model].convert === "function") {
+                this[model] = _models[model].convert.apply(this, args);
             }
-        } else {
-            throw new Error("Invalid color " + color);
+
+            if (typeof _models[model].init === "function") {
+                _models[model].init.apply(this, args);
+            }
         }
     }
 
