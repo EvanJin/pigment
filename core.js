@@ -5,7 +5,8 @@
  */
 
  var Color = (function() {
-    var _models = {},
+    var _reserved = [ "init", "match", "format", "convert", "depends", "tomodel", "frommodel" ],
+        _models = {},
         _fn = {};
 
     _models._internal_ = {
@@ -158,18 +159,12 @@
         }
 
         for (var prop in model) {
-            if (prop !== "tomodel" && /^to/.test(prop)) {
-                throw new Error("Cannot use property prefixed by 'to' " + prop + " in " + name);
+            if (_reserved.indexOf(prop) > -1) {
+                continue;
             }
 
-            if (prop !== "frommodel" && /^from/.test(prop)) {
-                throw new Error("Cannot use property prefixed by 'from' " + prop + " in " + name);
-            }
-
-            if (!/^(init|match|format|convert|depends|tomodel|frommodel)$/.test(prop)) {
-                // Add extra methods
-                ColorConstructor.prototype[prop] = model[prop];
-            }
+            // Add extra methods
+            ColorConstructor.prototype[prop] = model[prop];
         }
 
         // Add helper methods to convert from and to the model
