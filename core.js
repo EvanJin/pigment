@@ -72,7 +72,10 @@
         props = [ "red", "green", "blue" ];
 
         if (typeof _models[type].format === "function") {
-            this[type] = _models[type].format.apply(this, args);
+            Object.defineProperty(this, type, {
+                value: _models[type].format.apply(this, args),
+                writable: false
+            });
         }
 
         c = _models[type].frommodel.apply(this, args);
@@ -93,19 +96,20 @@
 
         Object.defineProperty(this, "_color", {
             value: color,
-            writable: false,
-            enumerable: false
+            writable: false
         });
 
         Object.defineProperty(this, "_type", {
             value: type,
-            writable: false,
-            enumerable: false
+            writable: false
         });
 
         for (var model in _models) {
             if (model !== type && typeof _models[model].convert === "function") {
-                this[model] = _models[model].convert.apply(this, args);
+                Object.defineProperty(this, model, {
+                    value: _models[model].convert.apply(this, args),
+                    writable: false
+                });
             }
 
             if (typeof _models[model].init === "function") {
