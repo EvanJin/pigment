@@ -17,6 +17,12 @@ To use **pigment** in your projects, you need to require the node module first.
 var Color = require("pigment");
 ```
 
+If you don't require the full functionality, you can use the basic package.
+
+```javascript
+var Color = require("pigment/basic");
+```
+
 To be able to perform any operations on a color, create a new color object.
 
 ```javascript
@@ -32,7 +38,7 @@ c.luminance(); // 0.29270422282503833
 c.darkness(); // 0.4362666666666666
 
 /* Perform operations on the color */
-c.fadeout(.2).mix("#e9f060", .5).fadein(.1).torgb(); // rgba(236, 186, 96, 0.99)
+c.fadeout(.2).mix("#e9f060", .5).fadein(.1).torgba(); // rgba(236, 186, 96, 0.99)
 ```
 
 Apart from color conversion and manipulation, **pigment** is also able to parse a chunk of text to find out any colors.
