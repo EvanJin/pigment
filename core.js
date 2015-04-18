@@ -62,6 +62,7 @@
         }
 
         args = Array.prototype.slice.call(arguments);
+
         type = _fn.getType(color);
 
         if (type) {

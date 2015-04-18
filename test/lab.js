@@ -10,7 +10,7 @@ describe("models:lab", function() {
         assert.ok(c.red === 241 && c.green === 102 && c.blue === 94 && c.alpha === 1);
     });
 
-    it("should return a valid xyza string", function() {
+    it("should return a valid lab string", function() {
         var c = new Color({ red: 240, green: 104, blue: 96 });
 
         assert.equal(c.tolab(), "lab(60.781628997104264, 52.88156888865597, 31.436847221618503)");
