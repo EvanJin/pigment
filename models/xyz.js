@@ -71,6 +71,10 @@ module.exports = {
     },
 
     tomodel: function() {
+        return "xyz(" + this.xyz[0] + ", " + this.xyz[1] + ", " + this.xyz[2] + ")";
+    },
+
+    toxyza: function() {
         return "xyza(" + this.xyz[0] + ", " + this.xyz[1] + ", " + this.xyz[2] + ", " + this.alpha + ")";
     }
 };

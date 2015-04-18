@@ -24,8 +24,8 @@ var c = new Color("#f06860");
 
 /* Get the color in hex, rgb, hsl etc. */
 c.tohex(); // #f06860
-c.torgb(); // rgba(240, 104, 96, 1)
-c.tohsl(); // hsla(3, 83%, 66%, 1)
+c.torgb(); // rgb(240, 104, 96)
+c.tohsla(); // hsla(3, 83%, 66%, 1)
 
 /* Get luminance or darkness of the color */
 c.luminance(); // 0.29270422282503833

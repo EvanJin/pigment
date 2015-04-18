@@ -101,6 +101,10 @@ module.exports = {
     },
 
     tomodel: function() {
+        return "hsl(" + this.hsl[0] + ", " + this.hsl[1] + "%, " + this.hsl[2] + "%)";
+    },
+
+    tohsla: function() {
         return "hsla(" + this.hsl[0] + ", " + this.hsl[1] + "%, " + this.hsl[2] + "%, " + this.alpha + ")";
     },
 

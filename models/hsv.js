@@ -106,6 +106,10 @@ module.exports = {
     },
 
     tomodel: function() {
+        return "hsv(" + this.hsv[0] + ", " + this.hsv[1] + "%, " + this.hsv[2] + "%)";
+    },
+
+    tohsva: function() {
         return "hsva(" + this.hsv[0] + ", " + this.hsv[1] + "%, " + this.hsv[2] + "%, " + this.alpha + ")";
     }
 };

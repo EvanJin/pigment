@@ -15,6 +15,7 @@ describe("models:hsl", function() {
     it("should return a valid hsla string", function() {
         var c = new Color({ red: 240, green: 104, blue: 96, alpha: 0.3 });
 
-        assert.equal(c.tohsl(), "hsla(3, 83%, 66%, 0.3)");
+        assert.equal(c.tohsl(), "hsl(3, 83%, 66%)");
+        assert.equal(c.tohsla(), "hsla(3, 83%, 66%, 0.3)");
     });
 });

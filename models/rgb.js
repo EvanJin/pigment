@@ -34,6 +34,10 @@ module.exports = {
     },
 
     tomodel: function() {
+        return "rgb(" + this.rgb[0] + ", " + this.rgb[1] + ", " + this.rgb[2] + ")";
+    },
+
+    torgba: function() {
         return "rgba(" + this.rgb[0] + ", " + this.rgb[1] + ", " + this.rgb[2] + ", " + this.alpha + ")";
     },
 

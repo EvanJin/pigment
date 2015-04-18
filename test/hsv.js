@@ -15,6 +15,7 @@ describe("models:hsv", function() {
     it("should return a valid hsva string", function() {
         var c = new Color({ red: 240, green: 104, blue: 96, alpha: 0.5 });
 
-        assert.equal(c.tohsv(), "hsva(3, 60%, 94%, 0.5)");
+        assert.equal(c.tohsv(), "hsv(3, 60%, 94%)");
+        assert.equal(c.tohsva(), "hsva(3, 60%, 94%, 0.5)");
     });
 });

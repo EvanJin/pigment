@@ -15,6 +15,7 @@ describe("models:rgb", function() {
     it("should return a valid rgba string", function() {
         var c = new Color({ red: 240, green: 104, blue: 96, alpha: 0.3 });
 
-        assert.equal(c.torgb(), "rgba(240, 104, 96, 0.3)");
+        assert.equal(c.torgb(), "rgb(240, 104, 96)");
+        assert.equal(c.torgba(), "rgba(240, 104, 96, 0.3)");
     });
 });
