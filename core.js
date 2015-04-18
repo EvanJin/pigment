@@ -232,6 +232,12 @@
         return colors;
     };
 
+    ColorConstructor.__defineGetter__("models", function() {
+        return Object.keys(_models).filter(function(m) {
+            return (m !== "_internal_");
+        });
+    });
+
     return ColorConstructor;
  }());
 
