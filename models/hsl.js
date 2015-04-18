@@ -3,7 +3,19 @@
 module.exports = {
     match: /^hsla?\s?\(\s?(\d+\.?\d?)\s?,\s?(\d+\.?\d?)%?\s?,\s?(\d+\.?\d?)%?\s?/i,
 
-    init: function() {
+    format: function(c) {
+        var hsl = c.replace(/[hsla()]/g, "").split(",");
+
+        this.alpha = hsl[3] ? parseFloat(hsl[3]) : 1;
+
+        return [
+            parseInt(hsl[0], 10),
+            parseInt(hsl[1], 10),
+            parseInt(hsl[2], 10)
+        ];
+    },
+
+    convert: function() {
         var r = this.red / 255,
             g = this.green / 255,
             b = this.blue / 255,
@@ -32,16 +44,15 @@ module.exports = {
             h /= 6;
         }
 
-        this.hsl = [
+        return [
             Math.round(h * 360),
             Math.round(s * 100),
             Math.round(l * 100)
         ];
     },
 
-    frommodel: function(c) {
-        var hsl, alpha,
-            h, s, l,
+    frommodel: function() {
+        var h, s, l,
             r, g, b,
             p, q,
             hue2Rgb = function(p, q, t) {
@@ -66,13 +77,9 @@ module.exports = {
                 return p;
             };
 
-        hsl = c.replace(/[hsla()]/g, "").split(",");
-
-        h = parseInt(hsl[0], 10) / 360;
-        s = parseInt(hsl[1], 10) / 100;
-        l = parseInt(hsl[2], 10) / 100;
-
-        alpha = hsl[3] ? parseFloat(hsl[3]) : 1;
+        h = this.hsl[0] / 360;
+        s = this.hsl[1] / 100;
+        l = this.hsl[2] / 100;
 
         if (s === 0) {
             r = g = b = l;
@@ -89,7 +96,7 @@ module.exports = {
             red: Math.round(r * 255),
             green: Math.round(g * 255),
             blue: Math.round(b * 255),
-            alpha: alpha
+            alpha: this.alpha
         };
     },
 

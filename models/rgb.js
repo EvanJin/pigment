@@ -3,18 +3,33 @@
 module.exports = {
     match: /^rgba?\s?\((\s?(\d+)\s?,){2}\s?(\d+)\s?/i,
 
-    init: function() {
-        this.rgb = [ this.red, this.green, this.blue ];
-    },
-
-    frommodel: function(c) {
+    format: function(c) {
         var rgb = c.replace(/[rgba()]/g, "").split(",");
 
+        this.alpha = rgb[3] ? parseFloat(rgb[3]) : 1;
+
+        return [
+            parseInt(rgb[0], 10),
+            parseInt(rgb[1], 10),
+            parseInt(rgb[2], 10)
+        ];
+    },
+
+    convert: function() {
+        return [
+            this.red,
+            this.green,
+            this.blue,
+            this.alpha
+        ];
+    },
+
+    frommodel: function() {
         return {
-            red: parseInt(rgb[0], 10),
-            green: parseInt(rgb[1], 10),
-            blue: parseInt(rgb[2], 10),
-            alpha: rgb[3] ? parseFloat(rgb[3]) : 1
+            red: this.rgb[0],
+            green: this.rgb[1],
+            blue: this.rgb[2],
+            alpha: this.alpha
         };
     },
 

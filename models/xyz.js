@@ -1,7 +1,19 @@
 module.exports = {
     match: /^xyza?\s?\((\s?(\d+\.?\d?)\s?,){2}\s?(\d+\.?\d?)\s?/i,
 
-    init: function() {
+    format: function(c) {
+        var xyz = c.replace(/[xyza()]/g, "").split(",");
+
+        this.alpha = xyz[3] ? parseFloat(xyz[3]) : 1;
+
+        return [
+            parseInt(xyz[0], 10),
+            parseInt(xyz[1], 10),
+            parseInt(xyz[2], 10)
+        ];
+    },
+
+    convert: function() {
         var rgb = [
                 this.red / 255,
                 this.green / 255,
@@ -18,25 +30,19 @@ module.exports = {
             rgb[i] = rgb[i] * 100;
         }
 
-        this.xyz = [
+        return [
             Math.round(rgb[0] * 0.412453 + rgb[1] * 0.357580 + rgb[2] * 0.180423),
             Math.round(rgb[0] * 0.212671 + rgb[1] * 0.715160 + rgb[2] * 0.072169),
             Math.round(rgb[0] * 0.019334 + rgb[1] * 0.119193 + rgb[2] * 0.950227)
         ];
     },
 
-    frommodel: function(c) {
-        var xyz, alpha,
-            x, y, z,
-            rgb = [];
+    frommodel: function() {
+        var x, y, z, rgb = [];
 
-        xyz = c.replace(/[xyza()]/g, "").split(",");
-
-        x = parseInt(xyz[0], 10) / 100;
-        y = parseInt(xyz[1], 10) / 100;
-        z = parseInt(xyz[2], 10) / 100;
-
-        alpha = xyz[3] ? parseFloat(xyz[3]) : 1;
+        x = this.xyz[0] / 100;
+        y = this.xyz[1] / 100;
+        z = this.xyz[2] / 100;
 
         rgb[0] = (x * 3.240479) + (y * -1.537150) + (z * -0.498535);
         rgb[1] = (x * -0.969256) + (y * 1.875992) + (z * 0.041556);
@@ -60,7 +66,7 @@ module.exports = {
             red: rgb[0],
             green: rgb[1],
             blue: rgb[2],
-            alpha: alpha
+            alpha: this.alpha
         };
     },
 

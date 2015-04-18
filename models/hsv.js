@@ -1,7 +1,19 @@
 module.exports = {
     match: /^hsva?\s?\(\s?(\d+\.?\d?)\s?,\s?(\d+\.?\d?)%?\s?,\s?(\d+\.?\d?)%?\s?/i,
 
-    init: function() {
+    format: function(c) {
+        var hsv = c.replace(/[hsva()]/g, "").split(",");
+
+        this.alpha = hsv[3] ? parseFloat(hsv[3]) : 1;
+
+        return [
+            parseInt(hsv[0], 10),
+            parseInt(hsv[1], 10),
+            parseInt(hsv[2], 10)
+        ];
+    },
+
+    convert: function() {
         var r = this.red / 255,
             g = this.green / 255,
             b = this.blue / 255,
@@ -30,26 +42,21 @@ module.exports = {
             h /= 6;
         }
 
-        this.hsv =  [
+        return [
             Math.round(h * 360),
             Math.round(s * 100),
             Math.round(v * 100)
         ];
     },
 
-    frommodel: function(c) {
-        var hsv, alpha,
-            h, s, v,
+    frommodel: function() {
+        var h, s, v,
             r, g, b,
             i, f, t, p, q;
 
-        hsv = c.replace(/[hsva()]/g, "").split(",");
-
-        h = parseInt(hsv[0], 10) / 360;
-        s = parseInt(hsv[1], 10) / 100;
-        v = parseInt(hsv[2], 10) / 100;
-
-        alpha = hsv[3] ? parseFloat(hsv[3]) : 1;
+        h = this.hsv[0] / 360;
+        s = this.hsv[1] / 100;
+        v = this.hsv[2] / 100;
 
         i = Math.floor(h * 6);
         f = h * 6 - i;
@@ -94,7 +101,7 @@ module.exports = {
             red: Math.round(r * 255),
             green: Math.round(g * 255),
             blue: Math.round(b * 255),
-            alpha: alpha
+            alpha: this.alpha
         };
     },
 

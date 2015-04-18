@@ -1,7 +1,18 @@
 module.exports = {
     match: /^cmyk\s?\((\s?(\d+\.?\d?)\s?,){3}\s?(\d+\.?\d?)\s?/i,
 
-    init: function() {
+    format: function(c) {
+        var cmyk = c.replace(/[cmyk()]/g, "").split(",");
+
+        return [
+            parseInt(cmyk[0], 10),
+            parseInt(cmyk[1], 10),
+            parseInt(cmyk[2], 10),
+            parseInt(cmyk[3], 10)
+        ];
+    },
+
+    convert: function() {
         var c, m, y, k;
 
         c = 1 - (this.red / 255);
@@ -18,7 +29,7 @@ module.exports = {
             y = (y - k) / (1 - k);
         }
 
-        this.cmyk = [
+        return [
             Math.round(c * 100),
             Math.round(m * 100),
             Math.round(y * 100),
@@ -26,15 +37,13 @@ module.exports = {
         ];
     },
 
-    frommodel: function(color) {
-        var cmyk, c, m, y, k;
+    frommodel: function() {
+        var c, m, y, k;
 
-        cmyk = color.replace(/[cmyk()]/g, "").split(",");
-
-        c = parseInt(cmyk[0], 10) / 100;
-        m = parseInt(cmyk[1], 10) / 100;
-        y = parseInt(cmyk[2], 10) / 100;
-        k = parseInt(cmyk[3], 10) / 100;
+        c = this.cmyk[0] / 100;
+        m = this.cmyk[1] / 100;
+        y = this.cmyk[2] / 100;
+        k = this.cmyk[3] / 100;
 
         c = (c * (1 - k) + k);
         m = (m * (1 - k) + k);
