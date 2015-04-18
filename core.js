@@ -139,15 +139,17 @@
             }
         }
 
-        if (typeof model.match !== "function" && !(model.match instanceof RegExp)) {
-            throw new Error("Invalid match method " + model.match + " in " + name);
+        if ("match" in model) {
+            if (typeof model.match !== "function" && !(model.match instanceof RegExp)) {
+                throw new Error("Invalid match method " + model.match + " in " + name);
+            }
+
+            if (typeof model.frommodel !== "function") {
+                throw new Error("Invalid frommodel method " + model.frommodel + " in " + name);
+            }
         }
 
-        if (typeof model.frommodel !== "function") {
-            throw new Error("Invalid frommodel method " + model.frommodel + " in " + name);
-        }
-
-        if (typeof model.tomodel !== "function") {
+        if ("tomodel" in model && typeof model.tomodel !== "function") {
             throw new Error("Invalid tomodel method " + model.tomodel + " in " + name);
         }
 
@@ -167,19 +169,23 @@
         }
 
         // Add helper methods to convert from and to the model
-        ColorConstructor.prototype["from" + name] = function() {
-            var args = Array.prototype.slice.call(arguments);
+        if (typeof model.frommodel === "function") {
+            ColorConstructor.prototype["from" + name] = function() {
+                var args = Array.prototype.slice.call(arguments);
 
-            args = args.length ? args : [ this._color ];
+                args = args.length ? args : [ this._color ];
 
-            return model.frommodel.apply(this, args);
-        };
+                return model.frommodel.apply(this, args);
+            };
+        }
 
-        ColorConstructor.prototype["to" + name] = function() {
-            var args = Array.prototype.slice.call(arguments);
+        if (typeof model.tomodel === "function") {
+            ColorConstructor.prototype["to" + name] = function() {
+                var args = Array.prototype.slice.call(arguments);
 
-            return model.tomodel.apply(this, args);
-        };
+                return model.tomodel.apply(this, args);
+            };
+        }
 
         _models[name] = model;
     };

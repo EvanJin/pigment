@@ -6,27 +6,23 @@ var assert = require("assert"),
 describe("core", function() {
     it("should throw error when adding invalid model", function() {
         assert.throws(function() {
-            Color.addModel("invalid", {});
+            Color.addModel("invalid", {
+                match: function() {}
+            });
         });
     });
 
     it("should throw error when dependency not satisfied", function() {
         assert.throws(function() {
             Color.addModel("none", {
-                depends: [ "nonexistent" ],
-                match: function() {},
-                frommodel: function() {},
-                tomodel: function() {}
+                depends: [ "nonexistent" ]
             });
         });
     });
 
     it("should call init method", function() {
         Color.addModel("none", {
-            match: function() {},
-            init: function() { this.inited = true; },
-            frommodel: function() {},
-            tomodel: function() {}
+            init: function() { this.inited = true; }
         });
 
         var c = new Color({ red: 240, green: 104, blue: 96 });
