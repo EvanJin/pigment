@@ -12,9 +12,11 @@
         match: function(c) {
             return (typeof c === "object" && typeof c.red === "number" && typeof c.green === "number" && typeof c.blue === "number");
         },
+
         frommodel: function(c) {
             return c;
         },
+
         tomodel: function() {
             return {
                 red: this.red,
@@ -65,6 +67,10 @@
         if (type) {
             props = [ "red", "green", "blue" ];
 
+            if (typeof _models[type].format === "function") {
+                this[type] = _models[type].format.apply(this, args);
+            }
+
             c = _models[type].frommodel.apply(this, args);
 
             for (var i = 0, l = props.length; i < l; i++) {
@@ -94,6 +100,10 @@
             });
 
             for (var model in _models) {
+                if (model !== type && typeof _models[model].convert === "function") {
+                    this[model] = _models[model].convert.apply(this, args);
+                }
+
                 if (typeof _models[model].init === "function") {
                     _models[model].init.apply(this, args);
                 }
@@ -149,7 +159,7 @@
                 throw new Error("Cannot use property prefixed by 'from' " + prop + " in " + name);
             }
 
-            if (!/^(init|match|depends|tomodel|frommodel)$/.test(prop)) {
+            if (!/^(init|match|format|convert|depends|tomodel|frommodel)$/.test(prop)) {
                 // Add extra methods
                 ColorConstructor.prototype[prop] = model[prop];
             }

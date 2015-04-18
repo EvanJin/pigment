@@ -61,8 +61,10 @@ Color.addModel(name, model);
 The model object must consist 3 properties,
 
 1. `match` - A function or a regex which is used to detect if the color is represented in the specific model representation.
-2. `frommodel` - A function which converts the color into an object with `red`, `green` and `blue` properties, and an optional `alpha` property.
-3. `tomodel` - A function which converts the color to the model representation.
+2. `format` - A function which formats the color string into model's representation.
+3. `convert` - A function which converts the color object into model's representation.
+4. `frommodel` - A function which converts the model's representation into an object with `red`, `green` and `blue` properties, and an optional `alpha` property.
+5. `tomodel` - A function which converts the color to the model representation.
 
 There is also an optional `init` method which is called when instantiating a color object.
 
