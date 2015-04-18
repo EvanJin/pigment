@@ -17,5 +17,7 @@ describe("models:hsv", function() {
 
         assert.equal(c.tohsv(), "hsv(3, 60%, 94%)");
         assert.equal(c.tohsva(), "hsva(3, 60%, 94%, 0.5)");
+        assert.equal(c.tohsb(), "hsb(3, 60%, 94%)");
+        assert.equal(c.tohsba(), "hsba(3, 60%, 94%, 0.5)");
     });
 });

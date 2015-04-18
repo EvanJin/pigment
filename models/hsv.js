@@ -111,5 +111,13 @@ module.exports = {
 
     tohsva: function() {
         return "hsva(" + this.hsv[0] + ", " + this.hsv[1] + "%, " + this.hsv[2] + "%, " + this.alpha + ")";
+    },
+
+    tohsb: function() {
+        return "hsb(" + this.hsv[0] + ", " + this.hsv[1] + "%, " + this.hsv[2] + "%)";
+    },
+
+    tohsba: function() {
+        return "hsba(" + this.hsv[0] + ", " + this.hsv[1] + "%, " + this.hsv[2] + "%, " + this.alpha + ")";
     }
 };
