@@ -3,7 +3,7 @@
 module.exports = {
     depends: [ "hsl" ],
 
-    getScheme: function() {
+    schemeFromDegrees: function() {
         var degrees = Array.prototype.slice.call(arguments),
             scheme = [],
             hue;
@@ -20,75 +20,75 @@ module.exports = {
     },
 
     complementaryScheme: function() {
-        return this.getScheme(0, 180);
+        return this.schemeFromDegrees(0, 180);
     },
 
     splitComplementaryScheme: function() {
-        return this.getScheme(0, 150, 320);
+        return this.schemeFromDegrees(0, 150, 320);
     },
 
     splitComplementaryCWScheme: function() {
-        return this.getScheme(0, 150, 300);
+        return this.schemeFromDegrees(0, 150, 300);
     },
 
     splitComplementaryCCWScheme: function() {
-        return this.getScheme(0, 60, 210);
+        return this.schemeFromDegrees(0, 60, 210);
     },
 
     triadicScheme: function() {
-        return this.getScheme(0, 120, 240);
+        return this.schemeFromDegrees(0, 120, 240);
     },
 
     clashScheme: function() {
-        return this.getScheme(0, 90, 270);
+        return this.schemeFromDegrees(0, 90, 270);
     },
 
     tetradicScheme: function() {
-        return this.getScheme(0, 90, 180, 270);
+        return this.schemeFromDegrees(0, 90, 180, 270);
     },
 
     neutralScheme: function() {
-        return this.getScheme(0, 15, 30, 45, 60, 75);
+        return this.schemeFromDegrees(0, 15, 30, 45, 60, 75);
     },
 
     analogousScheme: function() {
-        return this.getScheme(0, 30, 60, 90, 120, 150);
+        return this.schemeFromDegrees(0, 30, 60, 90, 120, 150);
     },
 
     fourToneCWScheme: function() {
-        return this.getScheme(0, 60, 180, 240);
+        return this.schemeFromDegrees(0, 60, 180, 240);
     },
 
     fourToneCCWScheme: function() {
-        return this.getScheme(0, 120, 180, 300);
+        return this.schemeFromDegrees(0, 120, 180, 300);
     },
 
     fiveToneAScheme: function() {
-        return this.getScheme(0, 115, 155, 205, 245);
+        return this.schemeFromDegrees(0, 115, 155, 205, 245);
     },
 
     fiveToneBScheme: function() {
-        return this.getScheme(0, 40, 90, 130, 245);
+        return this.schemeFromDegrees(0, 40, 90, 130, 245);
     },
 
     fiveToneCScheme: function() {
-        return this.getScheme(0, 50, 90, 205, 320);
+        return this.schemeFromDegrees(0, 50, 90, 205, 320);
     },
 
     fiveToneDScheme: function() {
-        return this.getScheme(0, 40, 155, 270, 310);
+        return this.schemeFromDegrees(0, 40, 155, 270, 310);
     },
 
     fiveToneEScheme: function() {
-        return this.getScheme(0, 115, 2, 30, 270, 320);
+        return this.schemeFromDegrees(0, 115, 2, 30, 270, 320);
     },
 
     sixToneCWScheme: function() {
-        return this.getScheme(0, 30, 120, 150, 240, 270);
+        return this.schemeFromDegrees(0, 30, 120, 150, 240, 270);
     },
 
     sixToneCCWScheme: function() {
-        return this.getScheme(0, 90, 120, 210, 240, 330);
+        return this.schemeFromDegrees(0, 90, 120, 210, 240, 330);
     },
 
     monochromaticScheme: function(n) {
