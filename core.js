@@ -177,11 +177,7 @@
         ColorConstructor.prototype["to" + name] = function() {
             var args = Array.prototype.slice.call(arguments);
 
-            if (this._type === name && !args.length) {
-                return this._color;
-            } else {
-                return model.tomodel.apply(this, args);
-            }
+            return model.tomodel.apply(this, args);
         };
 
         _models[name] = model;
