@@ -17,10 +17,16 @@ To use **pigment** in your projects, you need to require the node module first.
 var Color = require("pigment");
 ```
 
-If you don't require the full functionality, you can use the basic package.
+If you don't need all the functionality, you can use the basic package.
 
 ```javascript
 var Color = require("pigment/basic");
+```
+
+You can use the full package if you want color schemes and color blindness support.
+
+```javascript
+var Color = require("pigment/full");
 ```
 
 To be able to perform any operations on a color, create a new color object.

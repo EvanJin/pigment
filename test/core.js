@@ -1,7 +1,7 @@
 /* jshint mocha: true */
 
 var assert = require("assert"),
-    Color = require("../color.js");
+    Color = require("../basic.js");
 
 describe("core", function() {
     it("should throw error when adding invalid model", function() {
@@ -21,13 +21,15 @@ describe("core", function() {
     });
 
     it("should call init method", function() {
+        var inited;
+
         Color.addModel("none", {
-            init: function() { this.inited = true; }
+            init: function() { inited = true; }
         });
 
-        var c = new Color({ red: 240, green: 104, blue: 96 });
+        new Color({ red: 240, green: 104, blue: 96 });
 
-        assert.ok(c.inited);
+        assert.ok(inited);
     });
 
     it("should create a valid color object", function() {

@@ -1,7 +1,7 @@
 /* jshint mocha: true */
 
 var assert = require("assert"),
-    Color = require("../color.js");
+    Color = require("../basic.js");
 
 describe("models:name", function() {
     it("should create a valid color object", function() {
