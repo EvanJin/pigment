@@ -4,6 +4,7 @@ require("./rgb.js");
 require("./hex.js");
 require("./hsl.js");
 require("./hsv.js");
+require("./hwb.js");
 require("./xyz.js");
 require("./lab.js");
 require("./cmyk.js");
