@@ -4,18 +4,17 @@ module.exports = {
     depends: [ "hsl" ],
 
     schemeFromDegrees: function(degrees) {
-        var scheme = [],
-            hue;
+        var self = this;
 
-        for (var i = 0, l = degrees.length; i < l; i++) {
-            hue = (this.hsl[0] + degrees[i]) % 360;
+        degrees = Array.isArray(degrees) ? degrees : [];
 
-            scheme.push(new Color(this.fromhsl.call({
-                hsl: [ hue, this.hsl[1], this.hsl[2] ]
-            })));
-        }
+        return degrees.map(function(d) {
+            var hue = (self.hsl[0] + d) % 360;
 
-        return scheme;
+            return new Color(self.fromhsl.call({
+                hsl: [ hue, self.hsl[1], self.hsl[2] ]
+            }));
+        });
     },
 
     complementaryScheme: function() {
@@ -91,25 +90,23 @@ module.exports = {
     },
 
     monochromaticScheme: function(n) {
-        var scheme = [],
+        var self = this,
             lumas = [];
 
         n = (n && typeof n === "number") ? n : 10;
 
         for (var i = 0; i < n; i++) {
-            lumas.push((this.hsl[2] + (i * n)) % 100);
+            lumas.push((self.hsl[2] + (i * n)) % 100);
         }
 
         lumas.sort(function(a, b) {
             return a - b;
         });
 
-        for (var j = 0, l = lumas.length; j < l; j++) {
-            scheme.push(new Color(this.fromhsl.call({
-                hsl: [ this.hsl[0], this.hsl[1], lumas[j] ]
-            })));
-        }
-
-        return scheme;
+        return lumas.map(function(l) {
+            return new Color(self.fromhsl.call({
+                hsl: [ self.hsl[0], self.hsl[1], l ]
+            }));
+        });
     }
 };
