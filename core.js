@@ -32,7 +32,7 @@
         var type;
 
         if (!color) {
-            return;
+            return null;
         }
 
         for (var model in _models) {
@@ -246,14 +246,4 @@
     return ColorConstructor;
  }());
 
- if (typeof define === "function" && define.amd) {
-     // Define as AMD module
-     define(function() {
-         return Color;
-     });
- } else if (typeof module !== "undefined" && module.exports) {
-     // Export to CommonJS
-     module.exports = Color;
- } else {
-     window.Color = Color;
- }
+module.exports = Color;

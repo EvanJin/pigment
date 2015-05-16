@@ -27,9 +27,9 @@ describe("core", function() {
             init: function() { inited = true; }
         });
 
-        new Color({ red: 240, green: 104, blue: 96 });
+        var c = new Color({ red: 240, green: 104, blue: 96 });
 
-        assert.ok(inited);
+        assert.ok(c && inited);
     });
 
     it("should create a valid color object", function() {
