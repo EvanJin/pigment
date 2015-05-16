@@ -1,4 +1,4 @@
-/* global Color */
+var Color = require("../core.js");
 
 module.exports = {
     depends: [ "hsl" ],

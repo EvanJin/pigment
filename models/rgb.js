@@ -1,4 +1,4 @@
-/* global Color */
+var Color = require("../core.js");
 
 module.exports = {
     match: /^rgba?\s?\((\s?(\d+)\s?,){2}\s?(\d+)\s?/i,

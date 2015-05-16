@@ -1,4 +1,4 @@
-/* global Color */
+var Color = require("../core.js");
 
 module.exports = {
     match: /^hsla?\s?\(\s?(\d+\.?\d?)\s?,\s?(\d+\.?\d?)%?\s?,\s?(\d+\.?\d?)%?\s?/i,
@@ -54,7 +54,7 @@ module.exports = {
     frommodel: function() {
         var h, s, l,
             r, g, b,
-            p, q,
+            u, v,
             hue2Rgb = function(p, q, t) {
                 if (t < 0) {
                     t += 1;
@@ -84,12 +84,12 @@ module.exports = {
         if (s === 0) {
             r = g = b = l;
         } else {
-            q = l < 0.5 ? l * (1 + s) : l + s - l * s;
-            p = 2 * l - q;
+            v = l < 0.5 ? l * (1 + s) : l + s - l * s;
+            u = 2 * l - v;
 
-            r = hue2Rgb(p, q, h + 1 / 3);
-            g = hue2Rgb(p, q, h);
-            b = hue2Rgb(p, q, h - 1 / 3);
+            r = hue2Rgb(u, v, h + 1 / 3);
+            g = hue2Rgb(u, v, h);
+            b = hue2Rgb(u, v, h - 1 / 3);
         }
 
         return {
