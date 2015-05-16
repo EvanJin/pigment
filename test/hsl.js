@@ -18,4 +18,39 @@ describe("models:hsl", function() {
         assert.equal(c.tohsl(), "hsl(3, 83%, 66%)");
         assert.equal(c.tohsla(), "hsla(3, 83%, 66%, 0.3)");
     });
+
+    it("should rotate hue", function() {
+        var c = new Color("hsl(3, 83%, 66%)");
+
+        assert.equal(c.rotate(30).tohsl(), "hsl(33, 83%, 66%)");
+        assert.equal(c.rotate(240).tohsl(), "hsl(243, 83%, 66%)");
+    });
+
+    it("should saturate color", function() {
+        var c = new Color("hsl(3, 83%, 66%)");
+
+        assert.equal(c.saturate(0.4).tohsl(), "hsl(3, 116%, 66%)");
+        assert.equal(c.saturate(0.7).tohsl(), "hsl(3, 141%, 66%)");
+    });
+
+    it("should desaturate color", function() {
+        var c = new Color("hsl(3, 83%, 66%)");
+
+        assert.equal(c.desaturate(0.4).tohsl(), "hsl(3, 49%, 66%)");
+        assert.equal(c.desaturate(0.7).tohsl(), "hsl(3, 24%, 66%)");
+    });
+
+    it("should lighten color", function() {
+        var c = new Color("hsl(3, 83%, 66%)");
+
+        assert.equal(c.lighten(0.4).tohsl(), "hsl(3, 83%, 92%)");
+        assert.equal(c.lighten(0.7).tohsl(), "hsl(3, 83%, 112%)");
+    });
+
+    it("should darken color", function() {
+        var c = new Color("hsl(3, 83%, 66%)");
+
+        assert.equal(c.darken(0.4).tohsl(), "hsl(3, 83%, 39%)");
+        assert.equal(c.darken(0.7).tohsl(), "hsl(3, 83%, 19%)");
+    });
 });
