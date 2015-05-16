@@ -1,6 +1,6 @@
 {
   "name": "pigment",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Color information, conversion and manipulation library",
   "main": "color.js",
   "directories": {
