@@ -13,6 +13,6 @@ describe("models:lab", function() {
     it("should return a valid lab string", function() {
         var c = new Color({ red: 240, green: 104, blue: 96 });
 
-        assert.equal(c.tolab(), "lab(60.781628997104264, 52.88156888865597, 31.436847221618503)");
+        assert.equal(c.tolab(), "lab(61.02417386833784, 51.83687801554182, 30.785850609912345)");
     });
 });

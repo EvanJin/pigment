@@ -15,7 +15,7 @@ describe("models:xyz", function() {
     it("should return a valid xyza string", function() {
         var c = new Color({ red: 240, green: 104, blue: 96, alpha: 0.3 });
 
-        assert.equal(c.toxyz(), "xyz(43, 29, 14)");
-        assert.equal(c.toxyza(), "xyza(43, 29, 14, 0.3)");
+        assert.equal(c.toxyz(), "xyz(43.00025581071994, 29.27569265351996, 14.449577808531906)");
+        assert.equal(c.toxyza(), "xyza(43.00025581071994, 29.27569265351996, 14.449577808531906, 0.3)");
     });
 });
