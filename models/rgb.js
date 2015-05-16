@@ -78,12 +78,16 @@ module.exports = {
         });
     },
 
+    grayscale: function() {
+        return this.greyscale();
+    },
+
     mix: function(add, weight) {
         var c = new Color(add),
             t1, d, weight1, weight2,
             rgb = [];
 
-        weight = 1 - (weight ? weight : 0.5);
+        weight = 1 - (weight <= 1 ? weight : 0.5);
 
         t1 = (weight * 2) - 1;
         d = this.alpha - c.alpha;
