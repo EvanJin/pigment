@@ -1,5 +1,5 @@
 module.exports = {
-    match: /^cmyk\s?\((\s?(\d+\.?\d?)\s?,){3}\s?(\d+\.?\d?)\s?/i,
+    match: /^cmyk\s?\((\s?(\d+\.?(\d+)?)\s?,){3}\s?(\d+\.?(\d+)?)\s?/i,
 
     format: function(c) {
         var cmyk = c.replace(/[cmyk()]/g, "").split(",");

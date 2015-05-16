@@ -1,7 +1,7 @@
 var Color = require("../core.js");
 
 module.exports = {
-    match: /^hsla?\s?\(\s?(\d+\.?\d?)\s?,\s?(\d+\.?\d?)%?\s?,\s?(\d+\.?\d?)%?\s?/i,
+    match: /^hsla?\s?\(\s?(\d+\.?(\d+)?)\s?,\s?(\d+\.?(\d+)?)%?\s?,\s?(\d+\.?(\d+)?)%?\s?/i,
 
     format: function(c) {
         var hsl = c.replace(/[hsla()]/g, "").split(",");
