@@ -23,13 +23,32 @@ If you don't need all the functionality, you can use the basic package.
 var Color = require("pigment/basic");
 ```
 
+The basic package supports the `name`, `rgb`, `hex` and `hsl` color models.
+
+It also includes the following methods for color manipulation,
+
+* `luminance()` - luminance value of the color
+* `darkness()` - darkness value of the color
+* `negate()` - negative color of the color
+* `greyscale()`/`grayscale()` - greyscale color from the color
+* `mix(add, weight)` - mix with another color, where `add` is a valid color of any supported models, `weight`  (0-1, default: 0.5) is the amount to add
+* `fadein(ratio)` - increase alpha value by `ratio` (0-1)
+* `fadeout(ratio)` - decrease alpha value by `ratio` (0-1)
+* `rotate(degrees)` - rotate the hue by `degrees` (0-360)
+* `staturate(ratio)` - increase the saturation by `ratio` (0-1)
+* `destaturate(ratio)` - decrease the saturation by `ratio` (0-1)
+* `lighten(ratio)` - increase the luma by `ratio` (0-1)
+* `darken(ratio)` - decrease the luma by `ratio` (0-1)
+
+The default package supports all the models supported by the basic package as well as the `hsv`, `hwb`, `xyz`, `lab` and `cmyk` color models;
+
 You can use the full package if you want color schemes and color blindness support.
 
 ```javascript
 var Color = require("pigment/full");
 ```
 
-To be able to perform any operations on a color, create a new color object.
+To be able to perform any operations on a color, create a new color object. To convert to a specific color model, just prefix the model name by `to`.
 
 ```javascript
 var c = new Color("#f06860");
