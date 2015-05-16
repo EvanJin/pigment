@@ -70,10 +70,12 @@ module.exports = {
     },
 
     greyscale: function() {
+        var y = this.rgb[0] * 0.299 + this.rgb[1] * 0.587 + this.rgb[2] * 0.114;
+
         return new Color({
-            red: this.rgb[0] * 0.3,
-            green: this.rgb[1] * 0.59,
-            blue: this.rgb[2] * 0.11,
+            red: y,
+            green: y,
+            blue: y,
             alpha: this.alpha
         });
     },
