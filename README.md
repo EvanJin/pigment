@@ -35,8 +35,8 @@ It also includes the following methods for color manipulation,
 * `fadein(ratio)` - increase alpha value by `ratio` (0-1)
 * `fadeout(ratio)` - decrease alpha value by `ratio` (0-1)
 * `rotate(degrees)` - rotate the hue by `degrees` (0-360)
-* `staturate(ratio)` - increase the saturation by `ratio` (0-1)
-* `destaturate(ratio)` - decrease the saturation by `ratio` (0-1)
+* `saturate(ratio)` - increase the saturation by `ratio` (0-1)
+* `desaturate(ratio)` - decrease the saturation by `ratio` (0-1)
 * `lighten(ratio)` - increase the luma by `ratio` (0-1)
 * `darken(ratio)` - decrease the luma by `ratio` (0-1)
 
