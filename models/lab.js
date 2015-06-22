@@ -48,6 +48,6 @@ module.exports = {
     },
 
     tomodel: function() {
-        return "lab(" + this.lab[0] + ", " + this.lab[1] + ", " + this.lab[2] + ")";
+        return "lab(" + this.lab[0].toFixed(3) + ", " + this.lab[1].toFixed(3) + ", " + this.lab[2].toFixed(3) + ")";
     }
 };
