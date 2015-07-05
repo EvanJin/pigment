@@ -103,5 +103,3 @@ Any dependencies on other color models can be specified with a `depends` propert
 
 Have a look at the `models` directory in the repository for examples.
 
-## Notes
-The project is still in its early stages and not feature complete. Use it with caution.
