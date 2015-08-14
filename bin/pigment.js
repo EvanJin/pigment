@@ -8,7 +8,7 @@ var pack = require("../package.json"),
 // First argument should be the color string
 var color = process.argv[2],
     args = process.argv.slice(3),
-    ops = [], curr, prev, next;
+    items;
 
 function isArg(val) {
     return /^--.+$/.test(val);
@@ -16,6 +16,65 @@ function isArg(val) {
 
 function isNumber(val) {
     return /^(\d+|(\d*\.\d+))+$/.test(val);
+}
+
+function parseArgs(rest) {
+    var ops = [],
+        curr, prev, next;
+
+    // Create a list of operations to do on the color
+    for (var i = 0, l = rest.length; i < l; i++) {
+        curr = rest[i];
+        prev = rest[i - 1];
+        next = rest[i + 1];
+
+        if (isArg(curr)) {
+            ops.push({
+                fn: curr.replace(/^--/, ""),
+                params: next && !isArg(next) ? [ isNumber(next) ? parseFloat(next, 10) : next ] : []
+            });
+        } else if (!isArg(prev) && ops.length) {
+            ops[ops.length - 1].params.push(isNumber(curr) ? parseFloat(curr, 10) : curr);
+        }
+
+        if (ops.length) {
+            ops[ops.length - 1].index = i;
+        }
+    }
+
+    return ops;
+}
+
+function processColor(c, rest) {
+    // Run the color operations
+    parseArgs(rest).forEach(function(op) {
+        if (Array.isArray(c)) {
+            c = c.map(function(co) {
+                return processColor(co, rest.slice(op.index - 1));
+            });
+
+            return;
+        }
+
+        if (typeof c === "string") {
+            // Try to create a new color object
+            try {
+                c = new Color(c);
+            } catch(e) {
+                process.stderr.write(e.message + "\n");
+                process.exit(1);
+            }
+        }
+
+        if (typeof c[op.fn] === "function") {
+            c = c[op.fn].apply(c, op.params);
+        } else {
+            process.stderr.write("Invalid opteration --" + op.fn + "!\n");
+            process.exit(1);
+        }
+    });
+
+    return c;
 }
 
 if (!color) {
@@ -37,57 +96,41 @@ if (color.indexOf("-") === 0) {
     case "--version":
         process.stdout.write(pack.version + "\n");
         break;
+    case "-r":
+    case "--random":
+        color = Color.random().torgba();
+        break;
+    case "-p":
+    case "--parse":
+        if (args.length === 0) {
+            process.stderr.write("Nothing to parse!\n");
+            process.exit(1);
+        }
+
+        items = Color.parse(args.join(" "));
+
+        if (items.length === 0) {
+            process.stderr.write("No colors found in text!\n");
+            process.exit(1);
+        }
+
+        break;
     default:
         process.stdout.write("Invalid parameters passed. See '--help' for usage.\n");
         process.exit(1);
     }
-
-    process.exit(0);
 }
 
-if (args.length === 0) {
-    process.stderr.write("Nothing to do!\n");
-    process.exit(1);
-}
+color = items && items.length ? items : processColor(color, args);
 
-// Create a list of operations to do on the color
-for (var i = 0, l = args.length; i < l; i++) {
-    curr = args[i];
-    prev = args[i - 1];
-    next = args[i + 1];
-
-    if (isArg(curr)) {
-        ops.push({
-            fn: curr.replace(/^--/, ""),
-            params: next && !isArg(next) ? [ isNumber(next) ? parseFloat(next, 10) : next ] : []
-        });
-    } else if (!isArg(prev)) {
-        ops[ops.length - 1].params.push(isNumber(curr) ? parseFloat(curr, 10) : curr);
+if (Array.isArray(color)) {
+    color = color.map(function(c) {
+        return typeof c === "string" ? c : c.torgba();
+    }).join(", ");
+} else {
+    if (typeof color !== "string") {
+        color = color.torgba();
     }
-}
-
-// Run the color operations
-ops.forEach(function(op) {
-    if (typeof color === "string") {
-        // Try to create a new color object
-        try {
-            color = new Color(color);
-        } catch(e) {
-            process.stderr.write(e.message + "\n");
-            process.exit(1);
-        }
-    }
-
-    if (typeof color[op.fn] === "function") {
-        color = color[op.fn].apply(color, op.params);
-    } else {
-        process.stderr.write("No such option --" + op.fn + "!\n");
-        process.exit(1);
-    }
-});
-
-if (typeof color !== "string") {
-    color = color.torgba();
 }
 
 process.stdout.write(color + "\n");
