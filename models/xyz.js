@@ -15,10 +15,10 @@ module.exports = {
 
     convert: function() {
         var rgb = [
-                this.red / 255,
-                this.green / 255,
-                this.blue / 255
-            ];
+            this.red / 255,
+            this.green / 255,
+            this.blue / 255
+        ];
 
         for (var i = 0, l = rgb.length; i < l; i++) {
             if (rgb[i] > 0.04045) {
@@ -27,7 +27,7 @@ module.exports = {
                 rgb[i] /= 12.92;
             }
 
-            rgb[i] = rgb[i] * 100;
+            rgb[i] *= 100;
         }
 
         return [

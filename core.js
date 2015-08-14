@@ -4,7 +4,7 @@
  * @license - GPL-3.0+
  */
 
- var Color = (function() {
+var Color = (function() {
     var _reserved = [ "init", "match", "format", "convert", "depends", "tomodel", "frommodel" ],
         _models = {},
         _fn = {};
@@ -58,7 +58,7 @@
         var c, type, props, args;
 
         // Handle situation where called without "new" keyword
-        if (false === (this instanceof ColorConstructor)) {
+        if (this instanceof ColorConstructor === false) {
             return new ColorConstructor(color);
         }
 
@@ -244,6 +244,6 @@
     });
 
     return ColorConstructor;
- }());
+}());
 
 module.exports = Color;

@@ -61,44 +61,44 @@ module.exports = {
         n = wh + f * (v - wh); // linear interpolation
 
         switch (i) {
-            default:
-            case 0:
-            case 6:
-                r = v;
-                g = n;
-                b = wh;
+        default:
+        case 0:
+        case 6:
+            r = v;
+            g = n;
+            b = wh;
 
-                break;
-            case 1:
-                r = n;
-                g = v;
-                b = wh;
+            break;
+        case 1:
+            r = n;
+            g = v;
+            b = wh;
 
-                break;
-            case 2:
-                r = wh;
-                g = v;
-                b = n;
+            break;
+        case 2:
+            r = wh;
+            g = v;
+            b = n;
 
-                break;
-            case 3:
-                r = wh;
-                g = n;
-                b = v;
+            break;
+        case 3:
+            r = wh;
+            g = n;
+            b = v;
 
-                break;
-            case 4:
-                r = n;
-                g = wh;
-                b = v;
+            break;
+        case 4:
+            r = n;
+            g = wh;
+            b = v;
 
-                break;
-            case 5:
-                r = v;
-                g = wh;
-                b = n;
+            break;
+        case 5:
+            r = v;
+            g = wh;
+            b = n;
 
-                break;
+            break;
         }
 
         return {

@@ -6,15 +6,13 @@ module.exports = {
     schemeFromDegrees: function(degrees) {
         var self = this;
 
-        degrees = Array.isArray(degrees) ? degrees : [];
-
-        return degrees.map(function(d) {
+        return Array.isArray(degrees) ? degrees.map(function(d) {
             var hue = (self.hsl[0] + d) % 360;
 
             return new Color(self.fromhsl.call({
                 hsl: [ hue, self.hsl[1], self.hsl[2] ]
             }));
-        });
+        }) : [];
     },
 
     complementaryScheme: function() {

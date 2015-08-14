@@ -13,7 +13,7 @@ module.exports = {
             m = matrix,
             r, g, b, a,
             fu = function(n) {
-                return (n < 0 ? 0 : (n < 255 ? n : 255 ));
+                return (n < 0 ? 0 : (n < 255 ? n : 255));
             };
 
         r = ((c.r * m[0]) + (c.g * m[1]) + (c.b * m[2]) + (c.a * m[3]) + m[4]);

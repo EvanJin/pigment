@@ -40,7 +40,7 @@ module.exports = {
         for (var i = 0, l = xyz.length; i < l; i++) {
             p = Math.pow(xyz[i], 3);
 
-            xyz[i] = (p > 0.008856) ? p : ((xyz[i] - 16 / 116 ) / 7.787);
+            xyz[i] = (p > 0.008856) ? p : ((xyz[i] - 16 / 116) / 7.787);
             xyz[i] = Math.round(xyz[i] * white[i]);
         }
 
