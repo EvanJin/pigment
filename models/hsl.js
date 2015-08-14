@@ -30,15 +30,15 @@ module.exports = {
             s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
 
             switch (max) {
-                case r:
-                    h = ((g - b) / d) + (g < b ? 6 : 0);
-                    break;
-                case g:
-                    h = ((b - r) / d) + 2;
-                    break;
-                case b:
-                    h = ((r - g) / d) + 4;
-                    break;
+            case r:
+                h = ((g - b) / d) + (g < b ? 6 : 0);
+                break;
+            case g:
+                h = ((b - r) / d) + 2;
+                break;
+            case b:
+                h = ((r - g) / d) + 4;
+                break;
             }
 
             h /= 6;
@@ -57,9 +57,9 @@ module.exports = {
             u, v,
             hue2Rgb = function(p, q, t) {
                 if (t < 0) {
-                    t += 1;
+                    t ++;
                 } else if (t > 1) {
-                    t -= 1;
+                    t --;
                 }
 
                 if (t < (1 / 6)) {
@@ -114,7 +114,7 @@ module.exports = {
         hsl[0] = (hsl[0] + degrees) % 360;
         hsl[0] = hsl[0] < 0 ? 360 + hsl[0] : hsl[0];
 
-        return new Color(this.tohsl.call({
+        return new Color(this.tohsla.call({
             hsl: hsl,
             alpha: this.alpha
         }));
@@ -125,7 +125,7 @@ module.exports = {
 
         hsl[1] += hsl[1] * Math.max(Math.min(ratio, 1), 0);
 
-        return new Color(this.tohsl.call({
+        return new Color(this.tohsla.call({
             hsl: hsl,
             alpha: this.alpha
         }));
@@ -136,7 +136,7 @@ module.exports = {
 
         hsl[1] -= hsl[1] * Math.max(Math.min(ratio, 1), 0);
 
-        return new Color(this.tohsl.call({
+        return new Color(this.tohsla.call({
             hsl: hsl,
             alpha: this.alpha
         }));
@@ -147,7 +147,7 @@ module.exports = {
 
         hsl[2] += hsl[2] * Math.max(Math.min(ratio, 1), 0);
 
-        return new Color(this.tohsl.call({
+        return new Color(this.tohsla.call({
             hsl: hsl,
             alpha: this.alpha
         }));
@@ -158,7 +158,7 @@ module.exports = {
 
         hsl[2] -= hsl[2] * Math.max(Math.min(ratio, 1), 0);
 
-        return new Color(this.tohsl.call({
+        return new Color(this.tohsla.call({
             hsl: hsl,
             alpha: this.alpha
         }));
