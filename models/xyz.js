@@ -60,7 +60,7 @@ module.exports = {
         rgb[i] *= 12.92;
       }
 
-      rgb[i] = Math.round(rgb[i] * 255);
+      rgb[i] = Math.min(Math.round(rgb[i] * 255), 255);
     }
 
     return {
