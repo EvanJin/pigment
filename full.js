@@ -1,11 +1,11 @@
-var Color = require("./color.js"),
-    models = {};
+var Color = require('./color.js');
+var models = {};
 
-models.schemes = require("./models/schemes.js");
-models.colorblind = require("./models/colorblind.js");
+models.schemes = require('./models/schemes.js');
+models.colorblind = require('./models/colorblind.js');
 
 for (var model in models) {
-    Color.addModel(model, models[model]);
+  Color.addModel(model, models[model]);
 }
 
 module.exports = Color;

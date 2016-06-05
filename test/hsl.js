@@ -1,56 +1,56 @@
 /* eslint-env mocha */
 
-var assert = require("assert"),
-    Color = require("../basic.js");
+var assert = require('assert'),
+  Color = require('../basic.js');
 
-describe("models:hsl", function() {
-    it("should create a valid color object", function() {
-        var c = new Color("hsl(3, 83%, 66%)"),
-            d = new Color("hsla(63, 83%, 66%, .3)");
+describe('models:hsl', function() {
+  it('should create a valid color object', function() {
+    var c = new Color('hsl(3, 83%, 66%)'),
+      d = new Color('hsla(63, 83%, 66%, .3)');
 
-        assert.ok(c.red === 240 && c.green === 104 && c.blue === 96 && c.alpha === 1);
-        assert.ok(d.red === 233 && d.green === 240 && d.blue === 96 && d.alpha === 0.3);
-    });
+    assert.ok(c.red === 240 && c.green === 104 && c.blue === 96 && c.alpha === 1);
+    assert.ok(d.red === 233 && d.green === 240 && d.blue === 96 && d.alpha === 0.3);
+  });
 
-    it("should return a valid hsla string", function() {
-        var c = new Color({ red: 240, green: 104, blue: 96, alpha: 0.3 });
+  it('should return a valid hsla string', function() {
+    var c = new Color({ red: 240, green: 104, blue: 96, alpha: 0.3 });
 
-        assert.equal(c.tohsl(), "hsl(3, 83%, 66%)");
-        assert.equal(c.tohsla(), "hsla(3, 83%, 66%, 0.3)");
-    });
+    assert.equal(c.tohsl(), 'hsl(3, 83%, 66%)');
+    assert.equal(c.tohsla(), 'hsla(3, 83%, 66%, 0.3)');
+  });
 
-    it("should rotate hue", function() {
-        var c = new Color("hsl(3, 83%, 66%)");
+  it('should rotate hue', function() {
+    var c = new Color('hsl(3, 83%, 66%)');
 
-        assert.equal(c.rotate(30).tohsl(), "hsl(33, 83%, 66%)");
-        assert.equal(c.rotate(240).tohsl(), "hsl(243, 83%, 66%)");
-    });
+    assert.equal(c.rotate(30).tohsl(), 'hsl(33, 83%, 66%)');
+    assert.equal(c.rotate(240).tohsl(), 'hsl(243, 83%, 66%)');
+  });
 
-    it("should saturate color", function() {
-        var c = new Color("hsl(3, 83%, 66%)");
+  it('should saturate color', function() {
+    var c = new Color('hsl(3, 83%, 66%)');
 
-        assert.equal(c.saturate(0.4).tohsl(), "hsl(3, 116%, 66%)");
-        assert.equal(c.saturate(0.7).tohsl(), "hsl(3, 141%, 66%)");
-    });
+    assert.equal(c.saturate(0.4).tohsl(), 'hsl(3, 116%, 66%)');
+    assert.equal(c.saturate(0.7).tohsl(), 'hsl(3, 141%, 66%)');
+  });
 
-    it("should desaturate color", function() {
-        var c = new Color("hsl(3, 83%, 66%)");
+  it('should desaturate color', function() {
+    var c = new Color('hsl(3, 83%, 66%)');
 
-        assert.equal(c.desaturate(0.4).tohsl(), "hsl(3, 49%, 66%)");
-        assert.equal(c.desaturate(0.7).tohsl(), "hsl(3, 24%, 66%)");
-    });
+    assert.equal(c.desaturate(0.4).tohsl(), 'hsl(3, 49%, 66%)');
+    assert.equal(c.desaturate(0.7).tohsl(), 'hsl(3, 24%, 66%)');
+  });
 
-    it("should lighten color", function() {
-        var c = new Color("hsl(3, 83%, 66%)");
+  it('should lighten color', function() {
+    var c = new Color('hsl(3, 83%, 66%)');
 
-        assert.equal(c.lighten(0.4).tohsl(), "hsl(3, 83%, 92%)");
-        assert.equal(c.lighten(0.7).tohsl(), "hsl(3, 83%, 112%)");
-    });
+    assert.equal(c.lighten(0.4).tohsl(), 'hsl(3, 83%, 92%)');
+    assert.equal(c.lighten(0.7).tohsl(), 'hsl(3, 83%, 112%)');
+  });
 
-    it("should darken color", function() {
-        var c = new Color("hsl(3, 83%, 66%)");
+  it('should darken color', function() {
+    var c = new Color('hsl(3, 83%, 66%)');
 
-        assert.equal(c.darken(0.4).tohsl(), "hsl(3, 83%, 39%)");
-        assert.equal(c.darken(0.7).tohsl(), "hsl(3, 83%, 19%)");
-    });
+    assert.equal(c.darken(0.4).tohsl(), 'hsl(3, 83%, 39%)');
+    assert.equal(c.darken(0.7).tohsl(), 'hsl(3, 83%, 19%)');
+  });
 });
